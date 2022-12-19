@@ -82,6 +82,17 @@ const SceneWrapper = ({ values, onClick, opened }) => {
             renderer.setSize(window.innerWidth, window.innerHeight);
         }
 
+        // function animate() {
+        //     requestAnimationFrame(animate);
+
+        //     cube.rotation.x += 0.01;
+        //     cube.rotation.y += 0.01;
+
+        //     render()
+        // }
+
+        // animate()
+
         render()
 
         return () => {
