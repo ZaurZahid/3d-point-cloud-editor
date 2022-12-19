@@ -1,0 +1,68 @@
+* {
+    margin: 0;
+    padding: 0;
+    user-select: none;
+}
+
+p{
+    font-size:20px
+}
+
+.content-wrapper{
+    display: flex;
+    position: relative;
+}
+ 
+.editor-wrapper{
+    display: flex;
+    flex-direction: column;
+    min-width: 200px;
+    min-height: calc(100vh - 50px);
+    background-color: white;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 20px;
+}
+
+.input-box{
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+input{
+    height: 30px;
+    width: 50%;
+}
+
+hr{
+    margin: 10px 0 20px;
+}
+
+button {
+    background-color: aqua;
+    padding: 10px 20px;
+    max-width: 50%;
+    cursor: pointer;
+    border-color: aqua;
+    box-shadow: none;
+    outline: none;
+}
+
+.animate-btn{
+    border-color: rgba(47, 70, 176, 0.642);
+    background-color: rgba(47, 70, 176, 0.642);
+    margin-bottom: 20px;
+}
+
+ .camera-text{
+    color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+
+.camera-text{
+    top: 30px;
+}
