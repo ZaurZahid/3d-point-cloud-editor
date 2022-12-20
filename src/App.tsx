@@ -39,7 +39,7 @@ function App() {
 
   return (
     <>
-      <p className='camera-text'>Current camera: <strong style={{ color: "red" }}>{!opened ? "Perspective" : "Orthographic"}</strong></p>
+      <p className='camera-text'>Current camera: <strong>{!opened ? "Perspective" : "Orthographic"}</strong></p>
       <div className='content-wrapper'>
         <SceneWrapper values={newValues} onClick={() => setOpened(true)} opened={opened} />
         {opened ? <Editor values={newValues} setNewValues={setNewValues} onSave={() => setOpened(false)} /> : null}

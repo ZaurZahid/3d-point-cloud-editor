@@ -45,22 +45,41 @@ const SceneWrapper = ({ values, onClick, opened }) => {
             camera.rotation.order = 'YXZ';
         }
 
-        const renderer = new THREE.WebGLRenderer({ canvas: canvasRef.current });
+        const renderer = new THREE.WebGLRenderer({
+            canvas: canvasRef.current,
+            // antialias: true,
+            // alpha: true
+        });
+        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
         renderer.setSize(window.innerWidth, (window.innerHeight - 50));
         renderer.setPixelRatio(window.devicePixelRatio);
 
-        const geometry = new THREE.BoxGeometry();
-        var material = new THREE.MeshLambertMaterial({ ambient: 0x808080, color: 0xcccccc });
+        const planeGeometry = new THREE.PlaneBufferGeometry(20, 20, 32);
+        const planeMaterial = new THREE.MeshStandardMaterial({
+            color: 0xF0F0F0,
+            side: THREE.DoubleSide
+        });
+        const plane = new THREE.Mesh(planeGeometry, planeMaterial);
+        plane.position.z = -4;
+        plane.receiveShadow = true;
+        scene.add(plane);
 
-        const cube = new THREE.Mesh(geometry, material);
+
+        const cubeGeometry = new THREE.BoxGeometry();
+        const cubeMaterial = new THREE.MeshLambertMaterial({ color: 0x808080 });
+
+        const cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
         cube.castShadow = true;
         cube.receiveShadow = true;
 
         /* lighting */
-        const pointLight = new THREE.PointLight(0xffffff, 1, 100);
+        const pointLight = new THREE.DirectionalLight(0xffffff, 1, 100);
         pointLight.position.set(10, 10, 10);
-        scene.add(pointLight);
+        pointLight.castShadow = true;
+        pointLight.shadow.bias = -0.001
+        scene.add(pointLight)
 
         const sphereSize = 1;
         const pointLightHelper = new THREE.PointLightHelper(pointLight, sphereSize);
