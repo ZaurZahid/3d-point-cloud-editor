@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import * as THREE from 'three';
 import { useRef, useEffect } from 'react';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 const SceneWrapper = ({ values, onClick, opened }) => {
     const canvasRef = useRef();
@@ -82,18 +83,16 @@ const SceneWrapper = ({ values, onClick, opened }) => {
             renderer.setSize(window.innerWidth, window.innerHeight);
         }
 
-        // function animate() {
-        //     requestAnimationFrame(animate);
+        const controls = new OrbitControls(camera, canvasRef.current);
+        controls.update();
+        camera.zoom = 1000;
 
-        //     cube.rotation.x += 0.01;
-        //     cube.rotation.y += 0.01;
+        function animate() {
+            requestAnimationFrame(animate);
+            render()
+        }
 
-        //     render()
-        // }
-
-        // animate()
-
-        render()
+        animate()
 
         return () => {
             renderer.dispose();
