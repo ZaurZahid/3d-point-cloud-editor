@@ -51,9 +51,36 @@ const SceneWrapper = ({ values, onClick, opened }) => {
         renderer.setPixelRatio(window.devicePixelRatio);
 
         const geometry = new THREE.BoxGeometry();
-        const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+        var material = new THREE.MeshLambertMaterial({ ambient: 0x808080, color: 0xcccccc });
 
         const cube = new THREE.Mesh(geometry, material);
+        cube.castShadow = true;
+        cube.receiveShadow = true;
+
+        /* lighting */
+        const pointLight = new THREE.PointLight(0xffffff, 1, 100);
+        pointLight.position.set(10, 10, 10);
+        scene.add(pointLight);
+
+        const sphereSize = 1;
+        const pointLightHelper = new THREE.PointLightHelper(pointLight, sphereSize);
+        scene.add(pointLightHelper);
+
+        // const directionalLight = new THREE.DirectionalLight(0xffffff);
+        // directionalLight.castShadow = true;
+        // directionalLight.target = cube
+        // directionalLight.shadowCameraNear = 5;
+        // directionalLight.shadowCameraFar = 25;
+        // directionalLight.shadowCameraRight = 10;
+        // directionalLight.shadowCameraLeft = -10;
+        // directionalLight.shadowCameraTop = 10;
+        // directionalLight.shadowCameraBottom = -10;
+        // directionalLight.shadowCameraVisible = true;
+        // scene.add(directionalLight);
+
+        const ambient = new THREE.AmbientLight(0xcccccc);
+        scene.add(ambient);
+
 
 
         cube.scale.set(values.scalingX, values.scalingY, values.scalingZ)
@@ -85,7 +112,6 @@ const SceneWrapper = ({ values, onClick, opened }) => {
 
         const controls = new OrbitControls(camera, canvasRef.current);
         controls.update();
-        camera.zoom = 1000;
 
         function animate() {
             requestAnimationFrame(animate);
